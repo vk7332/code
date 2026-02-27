@@ -1,5 +1,0 @@
-{
-  "name": "TDS Calculator",
-  "description": "A calculator to determine Tax Deducted at Source (TDS) based on Indian tax laws.",
-  "requestFramePermissions": []
-}
