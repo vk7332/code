@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDS Calculator | VK Tax</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f1f5f9; }
+        
+        /* Neon Ribbon */
+        .neon-ribbon { background: #000; padding: 10px 0; text-align: center; border-bottom: 3px solid #00ff88; box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4); }
+        .neon-link { color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 10px #00ff88; text-decoration: none; }
+        
+        /* Professional Expertise Header */
+        .expert-header { max-width: 900px; margin: 15px auto; background: #fff; border-radius: 6px; padding: 12px 20px; border-left: 5px solid #e65100; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .expert-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 15px; font-size: 11px; color: #4b5563; margin-top: 5px; font-weight: 600; line-height: 1.2; }
+
+        /* Calculator Card */
+        .calc-card { background: white; display: flex; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.06); overflow: hidden; border: 1px solid #e2e8f0; }
+        .input-side { width: 50%; padding: 35px; border-right: 1px solid #f1f5f9; }
+        .result-side { width: 50%; background-color: #fef3c7; padding: 35px; position: relative; }
+
+        .main-h1 { color: #e65100; font-size: 3.2rem; font-weight: 900; line-height: 1; margin-bottom: 15px; }
+        
+        /* AdSense Slot */
+        .adsense-slot { width: 100%; max-width: 336px; height: 280px; background: #ffffff; border: 1px dashed #cbd5e1; margin: 0 auto 25px auto; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        
+        /* Inputs */
+        select, input[type="number"] { width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 14px; background: white; }
+        .btn-download { background-color: #064e3b; color: white; width: 100%; padding: 14px; font-weight: 700; border-radius: 4px; font-size: 1rem; margin-top: 15px; transition: 0.3s; }
+        .btn-download:hover { background-color: #032f24; transform: translateY(-1px); }
+
+        /* Reset Button (Centered & Stylish) */
+        .btn-reset { display: block; width: fit-content; margin: 20px auto 0; padding: 6px 20px; font-size: 12px; font-weight: 700; color: #94a3b8; border: 1px solid #e2e8f0; border-radius: 50px; transition: 0.3s; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn-reset:hover { background-color: #f8fafc; color: #e65100; border-color: #e65100; }
+
+        /* Result Display */
+        .tds-amount { font-size: 4.5rem; font-weight: 900; color: #e65100; line-height: 1; display: flex; align-items: center; }
+        
+        /* Copy Button (Medium Size) */
+        .copy-btn-md { width: 22px; height: 22px; cursor: pointer; color: #94a3b8; margin-left: 12px; transition: 0.2s; }
+        .copy-btn-md:hover { color: #064e3b; transform: scale(1.15); }
+
+        /* Blue Ribbon (Red Circle Compliance) */
+        .blue-cta-ribbon { background: linear-gradient(135deg, #2563eb, #1e40af); border-radius: 10px; padding: 15px; display: flex; align-items: center; justify-content: space-between; color: white; position: absolute; bottom: 25px; left: 20px; right: 20px; box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.3); }
+        .cta-text p { font-size: 10px; line-height: 1.3; margin: 0; }
+        .call-expert-btn { background: white; color: #1e40af; padding: 6px 16px; border-radius: 50px; font-size: 11px; font-weight: 800; text-decoration: none; transition: 0.3s; border: 2px solid white; }
+        .call-expert-btn:hover { background: transparent; color: white; }
+
+        @media (max-width: 850px) { .calc-card { flex-direction: column; } .input-side, .result-side { width: 100%; } .result-side { padding-bottom: 120px; } .expert-list { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="neon-ribbon">
+        <a href="https://www.vktax.in" target="_blank" class="neon-link">Visit VK Tax - Professional Tax Solutions</a>
+    </div>
+
+    <div class="expert-header">
+        <p class="text-[13px] font-semibold text-gray-800 leading-tight">
+            ✨ <a href="https://www.vktax.in" target="_blank" class="text-orange-600 hover:underline">VK Tax</a> is led by a qualified Income Tax Practitioner (M.Com & LL.B.).
+        </p>
+        <div class="expert-list">
+            <span>📅 Professional Filing</span>
+            <span>💼 ITR For Salaried</span>
+            <span>📄 Forms 10E/G/H</span>
+            <span>📈 Capital Gains</span>
+            <span>💰 Tax Planning</span>
+            <span>⚖️ Notice Support</span>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto p-4">
+        <div class="calc-card">
+            
+            <div class="input-side">
+                <h1 class="main-h1">TDS Calculator</h1>
+                <h2 class="text-xl font-bold mb-6 text-gray-700">Calculate your TDS</h2>
+
+                <div class="space-y-4">
+                    <div class="flex gap-6 text-gray-400 font-bold text-xs uppercase">
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="entity" checked> Individual</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="entity"> Other</label>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded">
+                        <p class="text-emerald-800 font-bold text-xs mb-2">PAN AVAILABLE? *</p>
+                        <div class="flex gap-6 text-xs font-bold">
+                            <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="pan" value="y" checked> YES</label>
+                            <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="pan" value="n"> NO</label>
+                        </div>
+                    </div>
+
+                    <select id="section">
+                       <option value="" disabled selected>Type of Payment *</option>
+                        <option value="10">193 - Interest on securities</option>
+                        <option value="10">194 - Dividends</option>
+                        <option value="10">194A - Interest other than interest on securities - Others Case</option>
+                        <option value="10">194A - Banks / Co-operative society (Banking/Post Office)</option>
+                        <option value="10">194A - Senior citizen</option>
+                        <option value="30">194B - Winning from Lotteries or crossword puzzle, etc.</option>
+                        <option value="30">194BA - Winnings from online games (w.e.f. 01-Apr-2023)</option>
+                        <option value="30">194BB - Winnings from Horse Race</option>
+                        <option value="1">194C - Payment to Contractors</option>
+                        <option value="5">194D - Insurance Commission</option>
+                        <option value="5">194DA - Life insurance policy (w.e.f. 01.10.2014)</option>
+                        <option value="10">194EE - National Savings Scheme (NSS)</option>
+                        <option value="10">194F - Repurchase Units by MFs</option>
+                        <option value="30">194G - Commission - Lottery</option>
+                        <option value="5">194H - Commission / Brokerage</option>
+                        <option value="2">194I(a) - Rent for Plant & Machinery</option>
+                        <option value="10">194I(b) - Rent for Land, Building & Furniture</option>
+                        <option value="10">194IA - Transfer of immovable property (w.e.f. 1-6-2013)</option>
+                        <option value="5">194IB - Rent payment by individual / HUF not covered u/s 194I</option>
+                        <option value="1">194IC - Payment under Specified agreement</option>
+                        <option value="2">194J(a) - Fees - Technical Services, Call Centre, Royalty, etc.</option>
+                        <option value="10">194J(b) - Fees - All other Professional Services</option>
+                        <option value="10">194K - Payment of Dividend by Mutual Funds (from 01-Apr-2020)</option>
+                        <option value="10">194LA - Compensation on transfer of immovable property</option>
+                        <option value="5">194M - Payment for Contracts/Brokerage/Professional Fees (Ind/HUF)</option>
+                        <option value="2">194N - Cash withdrawal in excess of 1 crore</option>
+                        <option value="1">194O - TDS on e-commerce participants (from 01-Oct-2020)</option>
+                        <option value="10">194P - TDS in case of Specified Senior Citizen (above 75 years)</option>
+                        <option value="0.1">194Q - TDS on Purchase of Goods exceeding Rs. 50 Lakhs</option>
+                        <option value="10">194R - Benefits or perquisites of business or profession</option>
+                        <option value="1">194S - Transfer of virtual digital asset (Other persons)</option>
+                        <option value="1">194S - Transfer of virtual digital asset (Specified persons)</option>
+                        <option value="10">192A - Payment against EPF Scheme</option>
+                        <option value="20">194E - Payment to Non-Resident Sportsmen or Association</option>
+                        <option value="5">194LB - Interest from infrastructure debt fund (non-resident)</option>
+                        <option value="5">194LD - Interest on certain bonds and govt securities</option>
+                        <option value="2">194N - Payment of certain amounts in cash</option>
+                        <option value="20">194NF - Payment of certain amounts in cash to non-filers</option>
+                        <option value="20">195 - (a) Income in respect of investment by NRI Citizen</option>
+                        <option value="10">195 - (b) Long-term capital gains referred to in Section 115E</option>
+                        <option value="20">195 - (c) Long-term capital gains referred to in Section 112</option>
+                        <option value="10">195 - (d) Long-term capital gains referred to in Section 112A</option>
+                        <option value="15">195 - (e) Short-term capital gains referred to in Section 111A</option>
+                        <option value="10">195 - (f) Long-term capital gains [clauses 10(33), 10(38) and 112A]</option>
+                        <option value="20">195 - (g) Interest payable by Govt or Indian concern</option>
+                        <option value="10">195 - (h) Royalty payable by Govt/Indian concern (agreement)</option>
+                        <option value="10">195 - (i) Royalty [not being royalty of nature referred to in (h)]</option>
+                        <option value="10">195 - (j) Fees for technical services payable by Govt/Indian concern</option>
+                        <option value="30">195 - (k) Any other income</option>
+                        <option value="20">196A - Foreign Company being unit holder in Mutual Fund</option>
+                        <option value="10">196B - Units held by Off-shore Fund</option>
+                        <option value="10">196C - Income from Foreign Currency Bonds</option>
+                        <option value="20">196D - Income of FII on Securities</option>
+                        <option value="10">196DA - Income of specified fund from securities</option>
+                        </select>
+
+                    <div class="relative">
+                        <span class="absolute left-3 top-3 font-bold text-gray-400">₹</span>
+                        <input type="number" id="amount" placeholder="Payment Amount*" class="pl-8">
+                    </div>
+
+                    <button class="btn-download">Download</button>
+                    <button onclick="resetForm()" class="btn-reset">Reset Form</button>
+                </div>
+            </div>
+
+            <div class="result-side">
+                <div class="adsense-slot">
+                    <span class="text-[10px] text-gray-200 font-bold tracking-widest mb-1">ADVERTISEMENT</span>
+                    <span class="text-slate-200 font-black text-xl text-center px-4">Standard AdSense 336x280 Slot</span>
+                </div>
+                <div>
+                    <span class="text-gray-200 font-bold uppercase text-[9px] tracking-widest">Total TDS (Incl. Cess)</span>
+                    <div class="tds-amount">
+                        ₹<span id="output">0</span>
+                        <svg onclick="copyValue()" class="copy-btn-md" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                    </div>   <p class="text-[9px] font-black text-orange-800 mt-1 uppercase tracking-tighter">Calculation Includes 4% Health & Education Cess</p>
+                    <div class="w-full h-[1px] bg-amber-200 mt-2"></div>
+                </div>
+
+                <div class="blue-cta-ribbon">
+                    <div class="cta-text">
+                        <p class="font-bold">Get Tax-Free## Fixed Returns up to 7.5%*</p>
+                        <p class="opacity-80">With VK Tax Expert Consultation</p>
+                        <p class="font-black mt-1">Save tax up to Rs. 46,800##</p>
+                    </div>
+                    <a href="https://www.vktax.in" target="_blank" class="call-expert-btn">Call Expert</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const amt = document.getElementById('amount');
+        const sec = document.getElementById('section');
+        const res = document.getElementById('output');
+
+        function update() {
+            const v = parseFloat(amt.value) || 0;
+            let r = parseFloat(sec.value) || 0;
+            const noPan = document.querySelector('input[name="pan"]:checked').value === 'n';
+            if(noPan && v > 0) r = Math.max(r, 20);
+
+            const baseTds = (v * r) / 100;
+            const total = baseTds + (baseTds * 0.04); // Accurate 4% Education Cess
+            res.innerText = total.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+        }
+
+        function copyValue() {
+            const val = res.innerText.replace(/,/g, '');
+            navigator.clipboard.writeText(val);
+        }
+
+        function resetForm() {
+            amt.value = '';
+            sec.selectedIndex = 0;
+            res.innerText = '0';
+        }
+
+        [amt, sec].forEach(el => el.addEventListener('input', update));
+        document.querySelectorAll('input[name="pan"]').forEach(el => el.addEventListener('change', update));
+    </script>
+</body>
+</html>
